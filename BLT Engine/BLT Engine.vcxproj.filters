@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Sprite">
       <UniqueIdentifier>{5a22f724-476e-4b02-995c-9e1b06e59034}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Actor">
+      <UniqueIdentifier>{1512904c-b8f2-47f1-90d8-55ceba6c424b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -54,6 +57,9 @@
     <ClCompile Include="AssetLayer.cpp">
       <Filter>Source Files\RoomLayer</Filter>
     </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sprite.h">
@@ -75,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Blueprint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

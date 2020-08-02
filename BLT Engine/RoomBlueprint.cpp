@@ -1,15 +1,18 @@
 #include "Room.h"
 
+#include <iostream>
+
 namespace BLT
 {
 	RoomBlueprint::RoomBlueprint(std::string name)
 		: name(name)
 	{
-
+		std::cout << "Creating room blueprint '" << name << "'" << std::endl;
 	}
 
 	RoomBlueprint::~RoomBlueprint()
 	{
+		std::cout << "Deleting room blueprint '" << name << "'" << std::endl;
 		for (auto layer : mLayers) {
 			delete layer;
 		}

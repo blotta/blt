@@ -3,7 +3,17 @@
 namespace BLT
 {
 	AssetLayer::AssetLayer(std::string name)
-		: RoomLayer{Asset, name} {}
+		: RoomLayer{Asset, name}
+	{
+	}
+
+	AssetLayer::~AssetLayer()
+	{
+		for (AssetLayerElement e : mAssets)
+		{
+			delete e.sprite;
+		}
+	}
 
 	std::vector<AssetLayerElement>& const AssetLayer::getAssets()
 	{

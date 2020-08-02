@@ -10,7 +10,7 @@ namespace BLT
 	Room::Room(std::string name, std::vector<RoomLayerBlueprint*> const &layers)
 		: name(name)
 	{
-		// auto layer = layers.begin();
+		std::cout << "Instantiating room '" << name << "'" << std::endl;
 		for (auto layer : layers)
 		{
 			if (layer->type == Asset)
@@ -22,21 +22,21 @@ namespace BLT
 				mLayers.emplace_back(assetLayer);
 
 				// instantiate layer assets
-				for (auto asset : albp->getAssets())
+				for (auto & assetBp : albp->getAssets())
 				{
 					AssetLayerElement elem{
-						Game::getInstance()->getSpriteBlueprint(asset.sprite)->_instantiate(),
-						asset.transform
+						Game::getInstance()->getSpriteBlueprint(assetBp.sprite)->_instantiate(),
+						assetBp.transform
 					};
 					assetLayer->addElement(elem);
 				}
 			}
-
 		}
 	}
 
 	Room::~Room()
 	{
+		std::cout << "Destroying room instance '" << name << "'" << std::endl;
 		for (auto layer : mLayers) {
 			delete layer;
 		}
@@ -54,11 +54,10 @@ namespace BLT
 				AssetLayer* al = (AssetLayer*)layer;
 				for (auto asset : al->getAssets())
 				{
-					asset.sprite.render(asset.transform);
+					asset.sprite->render(asset.transform);
 				}
 
 			}
 		}
-
 	}
 }

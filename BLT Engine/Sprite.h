@@ -8,20 +8,32 @@
 
 namespace BLT
 {
+	struct SpriteControl
+	{
+		Vector2f scale;
+		Vector2i size;
+		Vector2i origin;
+		Rect collisionMask;
+	};
+
 	/*-----------------------------------------------------------------*/
 	/*----------------------- Sprite ----------------------------------*/
 	/*-----------------------------------------------------------------*/
 	class Sprite
 	{
 	public:
-		Sprite(std::string bpName, Vector2f scale, Vector2i size, Vector2i origin, Rect collisionMask, void* texture, void* renderer);
+		// Sprite(std::string bpName, Vector2f scale, Vector2i size, Vector2i origin, Rect collisionMask, void* texture, void* renderer);
+		Sprite(std::string bpName, SpriteControl sprCtrl, void* texture, void* renderer);
 		~Sprite();
 
+
 		const std::string blueprintName;
-		Vector2f scale;
-		Vector2i size;
-		Vector2i origin;
-		Rect collisionMask;
+
+		SpriteControl val;
+		// Vector2f scale;
+		// Vector2i size;
+		// Vector2i origin;
+		// Rect collisionMask;
 
 		void render(Transform transform);
 
@@ -39,14 +51,15 @@ namespace BLT
 		SpriteBlueprint(std::string name, std::string path, void* renderer);
 		~SpriteBlueprint();
 
-
 		const std::string name;
-		Vector2f scale;
-		Vector2i size;
-		Vector2i origin;
-		Rect collisionMask;
 
-		Sprite _instantiate();
+		SpriteControl val;
+		// Vector2f scale;
+		// Vector2i size;
+		// Vector2i origin;
+		// Rect collisionMask;
+
+		Sprite* _instantiate();
 	private:
 		SDL_Texture* mTexture;
 		SDL_Renderer* mRenderer;

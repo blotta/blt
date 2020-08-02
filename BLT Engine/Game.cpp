@@ -26,10 +26,12 @@ namespace BLT
 
 	Game::~Game()
 	{
+		if (mCurrentRoom != nullptr)
+			delete mCurrentRoom;
+
 		// destroy room blueprints
 		for (auto roomBP : mRoomBlueprints)
 		{
-			std::cout << "Deleted room blueprint '" << roomBP->name << "'\n";
 			delete roomBP;
 		}
 		mRoomBlueprints.clear();
@@ -37,7 +39,6 @@ namespace BLT
 		// destroy sprite blueprints ("owns" texture pointer)
 		for (auto sbp : mSpriteBlueprints)
 		{
-			std::cout << "Deleted sprite blueprint '" << sbp->name << "'\n";
 			delete sbp;
 		}
 		mSpriteBlueprints.clear();
@@ -75,8 +76,6 @@ namespace BLT
 		// Register Sprite blueprint
 		mSpriteBlueprints.push_back(spr);
 
-		std::cout << "Created sprite '" << spr->name << "'\n";
-
 		// Return as Sprite*
 		return spr;
 	}
@@ -109,7 +108,6 @@ namespace BLT
 
 		mRoomBlueprints.push_back(rm);
 
-		std::cout << "Created room '" << rm->name << "'\n";
 		return rm;
 	}
 
@@ -172,9 +170,6 @@ namespace BLT
 			SDL_SetRenderDrawColor(mRenderer, 0x00, 0x00, 0x00, 0xFF);
 			SDL_RenderClear(mRenderer);
 
-			// Render texture to screen
-			// SDL_Rect r{ 10, 10, 64, 64 };
-			// SDL_RenderCopy(gRenderer, gTexture, NULL, &r);
 			mCurrentRoom->update();
 
 			// Update screen

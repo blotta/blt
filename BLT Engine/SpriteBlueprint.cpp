@@ -8,17 +8,23 @@ namespace BLT
 {
 	// PUBLIC
 
-	// user shouldn't be used
 	SpriteBlueprint::SpriteBlueprint(std::string name, std::string path, void* renderer)
 		: name(name)
 	{
-		this->scale = Vector2f{ 1.f, 1.f };
+		std::cout << "Creating sprite blueprint '" << name << "'" << std::endl;
+		// this->scale = Vector2f{ 1.f, 1.f };
+		this->val.scale = Vector2f{ 1.f, 1.f };
 
 		SDL_Surface* surf = SpriteBlueprint::loadSurface(path);
 
-		this->size = Vector2i{ surf->w, surf->h };
-		this->origin = Vector2i{ 0, 0 };
-		this->collisionMask = Rect{ 0, 0, surf->w - 1, surf->h - 1 };
+		// this->size = Vector2i{ surf->w, surf->h };
+		this->val.size = Vector2i{ surf->w, surf->h };
+
+		// this->origin = Vector2i{ 0, 0 };
+		this->val.origin = Vector2i{ 0, 0 };
+
+		// this->collisionMask = Rect{ 0, 0, surf->w - 1, surf->h - 1 };
+		this->val.collisionMask = Rect{ 0, 0, surf->w - 1, surf->h - 1 };
 
 		this->mRenderer = (SDL_Renderer*)renderer;
 		this->mTexture = SpriteBlueprint::loadTexture(surf, mRenderer);
@@ -26,12 +32,14 @@ namespace BLT
 
 	SpriteBlueprint::~SpriteBlueprint()
 	{
+		std::cout << "Deleting sprite blueprint '" << name << "'" << std::endl;
 		SDL_DestroyTexture(this->mTexture);
 	}
 
-	Sprite SpriteBlueprint::_instantiate()
+	Sprite* SpriteBlueprint::_instantiate()
 	{
-		return Sprite(name, scale, size, origin, collisionMask, (void*)mTexture, (void*)mRenderer);
+		return new Sprite(name, val, (void*)mTexture, (void*)mRenderer);
+		// return Sprite(name, scale, size, origin, collisionMask, (void*)mTexture, (void*)mRenderer);
 	}
 
 	SDL_Texture* SpriteBlueprint::loadTexture(SDL_Surface* surf, SDL_Renderer* rend)

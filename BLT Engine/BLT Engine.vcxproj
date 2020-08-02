@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="AssetLayer.cpp" />
     <ClCompile Include="AssetLayerBlueprint.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="SpriteBlueprint.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.h" />
     <ClInclude Include="BLT.h" />
     <ClInclude Include="Blueprint.h" />
     <ClInclude Include="Game.h" />

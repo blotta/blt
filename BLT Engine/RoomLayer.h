@@ -23,7 +23,7 @@ namespace BLT
 	{
 	public:
 		RoomLayer(RoomLayerType type, std::string name);
-		~RoomLayer();
+		virtual ~RoomLayer();
 
 		const RoomLayerType type;
 		const std::string name;
@@ -37,7 +37,7 @@ namespace BLT
 	{
 	public:
 		RoomLayerBlueprint(RoomLayerType type, std::string name);
-		~RoomLayerBlueprint();
+		virtual ~RoomLayerBlueprint();
 
 		const RoomLayerType type;
 		const std::string name;
@@ -57,6 +57,7 @@ namespace BLT
 	{
 	public:
 		AssetLayerBlueprint(std::string name);
+		~AssetLayerBlueprint();
 
 		void addElement(AssetLayerElementBlueprint a);
 		std::vector<AssetLayerElementBlueprint>& const getAssets();
@@ -69,14 +70,20 @@ namespace BLT
 	/*-----------------------------------------------------------------*/
 	struct AssetLayerElement
 	{
-		Sprite sprite;
+		Sprite* sprite = nullptr;
 		Transform transform;
+		// AssetLayerElement(Sprite* s, Transform t) : sprite(s), transform(t) {}
+
+		// For some reason, this makes iterators crash with read violation
+		// Sprite* being freed on AssetLayer's destructor
+		// ~AssetLayerElement() { delete sprite; }
 	};
 
 	class AssetLayer : public RoomLayer
 	{
 	public:
 		AssetLayer(std::string name);
+		~AssetLayer();
 
 		void addElement(AssetLayerElement a);
 		std::vector<AssetLayerElement>& const getAssets();

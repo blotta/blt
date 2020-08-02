@@ -20,8 +20,8 @@ int main(int argc, char* args[])
 	game->createSpriteBlueprint("spr_astronaut_idle", "res/images/astronaut.png");
 
 	SpriteBlueprint* astro_idle = game->getSpriteBlueprint("spr_astronaut_idle");
-	astro_idle->origin = Vector2i{ astro_idle->size.x / 2, astro_idle->size.y - 1 };
-	astro_idle->scale = Vector2f{ 2.f, 1.f };
+	astro_idle->val.origin = Vector2i{ astro_idle->val.size.x / 2, astro_idle->val.size.y - 1 };
+	astro_idle->val.scale = Vector2f{ 2.f, 1.f };
 
 	SpriteBlueprint* hook = game->createSpriteBlueprint("spr_hook", "res/images/hook.png");
 
